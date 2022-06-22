@@ -1,0 +1,55 @@
+<div class="clients-table" *ngIf="clientPagination;" @opacityAnimation>
+    <div class="clients-table__row">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <input matInput placeholder="Поиск" [(ngModel)]="clientPaginationRequest.search" (ngModelChange)="clientPaginationRequestChanged();">
+        </mat-form-field>
+        <button mat-button (click)="openClientCreatorDialog();">
+            <fa-icon [icon]="faUserPlus"></fa-icon>
+        </button>
+    </div>
+    <div class="clients-table__mat-table-wrapper">
+        <table mat-table [dataSource]="clientPagination.data" (matSortChange)="sortChanged($event);" matSort>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Имя </th>
+                <td mat-cell *matCellDef="let client"> {{ client.name }} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="surname">
+                <th mat-header-cell *matHeaderCellDef  mat-sort-header> Фамилия </th>
+                <td mat-cell *matCellDef="let client"> {{ client.surname }} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="patronymic">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Отчество </th>
+                <td mat-cell *matCellDef="let client"> {{ client.patronymic }} </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="clientTableColumns"></tr>
+            <tr mat-row 
+                *matRowDef="let client; columns: clientTableColumns;" 
+                class="clients-table__mat-row" 
+                [ngClass]="{ 'clients-table__mat-row--red' : client.isDeleted }"
+                (click)="openClientViewerDialog(client);">
+            </tr>
+        </table>
+    </div>
+    <div class="clients-table__row">
+        <div class="clients-table__search-result-info">
+            <ng-container *ngIf="clientPaginationRequest.search">
+                По запросу <strong>'{{ clientPaginationRequest.search }}'</strong> найдено {{ clientPagination.total }} клиентов
+            </ng-container>
+        </div>
+        <mat-paginator [length]="clientPagination.total"
+            [pageSize]="clientPaginationRequest.limit"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            [pageIndex]="clientPagination.page - 1"
+            (page)="paginatorChanged($event)">
+        </mat-paginator>
+    </div>
+</div>
+
+<ng-template #skeleton>
+    <div class="clients-table">
+        <ngx-skeleton-loader count="1" [theme]="{ 'border-radius' : '5px', height: '500px' }"></ngx-skeleton-loader>
+    </div>
+</ng-template>

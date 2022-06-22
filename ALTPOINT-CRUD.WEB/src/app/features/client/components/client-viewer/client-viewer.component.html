@@ -1,0 +1,42 @@
+<div class="client-viewer">
+    <div class="client-viewer__header">
+        {{ client.id }} 
+        <span class="client-viewer__mode-message"> {{ modeMessage }}</span>
+    </div>
+    <ng-container *ngIf="editModeEnabled; else viewMode;">
+        <form [formGroup]="form">          
+            <div class="client-viewer__body">
+                <mat-form-field class="client-viewer__mat-form-field" appearance="outline">
+                    <input matInput placeholder="Имя" formControlName="name">
+                </mat-form-field>
+                <mat-form-field class="client-viewer__mat-form-field" appearance="outline">
+                    <input matInput placeholder="Фамилия" formControlName="surname">
+                </mat-form-field>
+                <mat-form-field class="client-viewer__mat-form-field" appearance="outline">
+                    <input matInput placeholder="Отчество" formControlName="patronymic">
+                </mat-form-field>
+            </div>
+            <div class="client-viewer__footer">
+                <button mat-button (click)="saveChanges();">Сохранить изменения</button>
+            </div>
+        </form>
+    </ng-container>
+</div>
+
+<ng-template #viewMode>
+    <div class="client-viewer__body">
+        <mat-form-field class="client-viewer__mat-form-field" appearance="outline">
+            <input matInput placeholder="Имя" [(ngModel)]="client.name" disabled>
+        </mat-form-field>
+        <mat-form-field class="client-viewer__mat-form-field" appearance="outline">
+            <input matInput placeholder="Фамилия" [(ngModel)]="client.surname" disabled>
+        </mat-form-field>
+        <mat-form-field class="client-viewer__mat-form-field" appearance="outline">
+            <input matInput placeholder="Отчество" [(ngModel)]="client.patronymic" disabled>
+        </mat-form-field>
+    </div>
+    <div class="client-viewer__footer">
+        <button mat-button (click)="editModeEnable();">Редактировать</button>
+        <button mat-button color="alert" (click)="delete();">Удалить</button>
+    </div>
+</ng-template>

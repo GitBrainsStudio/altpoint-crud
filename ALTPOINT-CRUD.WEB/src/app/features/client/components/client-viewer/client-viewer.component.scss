@@ -1,0 +1,40 @@
+.client-viewer
+{
+    width: 600px;
+}
+
+.client-viewer__body
+{
+    height: 500px;
+}
+
+.client-viewer__footer
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px 10px 0 10px;
+}
+
+.client-viewer__mat-form-field
+{
+    width: 100%;
+}
+
+.client-viewer__header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.client-viewer__mode-message
+{
+    font-size: 12px;
+}
+
+.client-viewer__mat-form-field--disabled
+{
+    pointer-events: none;
+}

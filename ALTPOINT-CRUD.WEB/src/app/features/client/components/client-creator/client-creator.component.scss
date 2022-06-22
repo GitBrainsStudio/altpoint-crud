@@ -1,0 +1,29 @@
+.client-creator
+{
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.client-creator__body
+{
+    height: 500px;
+}
+
+.client-creator__mat-form-field
+{
+    width: 100%;
+}
+
+.client-creator__header
+{
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.client-creator__footer
+{
+    display: flex;
+    justify-content: center;
+}
